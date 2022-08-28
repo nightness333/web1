@@ -1,0 +1,154 @@
+body {
+  background-image: url(bg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+#header {
+
+}
+
+div#header h1 {
+  font-family: monospace;
+  font-size: 40px;
+  color: #373e5b;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: white;
+}
+
+div#header h2 {
+  font-family: monospace;
+  font-size: 40px;
+  color: #373e5b;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: white;
+}
+
+#form_block {
+
+}
+
+div#form_block p {
+  background-color: #dbd3c2;
+  font-family: monospace;
+  font-size: 32px;
+  text-align: center;
+  color: #a85e5e;
+  width: 15%;
+  border: 2px white solid;
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#form_block table {
+  width: 100%;
+  background-color: #e8e3d6;
+  border-radius: 5px;
+  border: 2px solid #b0a995;
+}
+
+#y_table label {
+  font-size: 22px;
+  color: #b82020;
+  font-family: monospace;
+}
+
+#input_x {
+  margin: 0 auto;
+  width: 100%;
+  height: 40px;
+  background-color: #e8e3d6;
+  font-family: monospace;
+  border-radius: 5px;
+  border: 1px solid #b0a995;
+  font-size: 25px;
+  color: #b82020;
+}
+
+#r_select {
+  margin-bottom: 5px;
+  margin: 0 auto;
+  width: 100%;
+  height: 40px;
+  background-color: #e8e3d6;
+  font-family: monospace;
+  border-radius: 5px;
+  border: 1px solid #b0a995;
+  font-size: 20px;
+  color: #b82020;
+}
+
+#image_block {
+  text-align: center;
+  width: 28%;
+}
+
+div#image_block img {
+  max-width: 100%;
+}
+
+#image-canvas {
+  width: 95%;
+}
+
+#table_block {
+  width: 43%;
+  float: left;
+  background-image: url(bg_table.jpg);
+  min-height: 50%;
+  border: 3px #515a7a solid;
+  padding: 1% 1% 2% 1%;
+  margin: 1% 0% 2% 1%;
+}
+
+#result-table {
+  background-color: #cfd6f0;
+  border: 4px #8397dd solid;
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+#result-table th {
+  font-family: monospace;
+  font-size: 20px;
+}
+
+#result-table td {
+  font-family: monospace;
+  font-size: 15px;
+}
+
+#result-table tr {
+  height: 2em;
+}
+
+#result-table tr:nth-child(2n) {
+  background-color: #8394cf;
+}
+
+.info_block {
+  background-image: url(bg_form.jpg);
+  background-repeat: repeat;
+  background-attachment: scroll;
+  border: 3px #a85e5e solid;
+  width: 18%;
+  float: left;
+  padding: 1% 1% 1% 1%;
+  margin: 1% 0% 2% 1%;
+}
+
+.button_form {
+  width: 100%;
+  height: 40px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  border: 1px solid #b0a995;
+  background-color: #e8e3d6;
+  font-size: 20px;
+  font-family: monospace;
+  color: #b82020;
+}

@@ -1,0 +1,116 @@
+<html lang="en">
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="UTF-8">
+  <title>lab1</title>
+</head>
+<body>
+  <div id="header">
+    <h1 id="name">Cheremnov Konstantin</h1>
+    <h2>P32131, var: 14700 | ITMO, Saint-Petersburg</h2>
+  </div>
+  <div id="container">
+    <div id="form_block" class="info_block">
+      <form id="input-form" action="" method="GET">
+        <p>X</p>
+        <input type="text" id="input_x" name="x">
+        <p>Y</p>
+        <table id="y_table">
+          <tr>
+            <td>
+              <div class="form_radio">
+                <input type="radio" id="-3" name="y" value="-3">
+                <label for="-3">-3</label>
+              </div>
+            </td>
+            <td>
+              <div class="form_radio">
+                <input type="radio" id="-2" name="y" value="-2">
+                <label for="-2">-2</label>
+              </div>
+            </td>
+            <td>
+              <div class="form_radio">
+                <input type="radio" id="-1" name="y" value="-1">
+                <label for="-1">-1</label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="form_radio">
+                <input type="radio" id="0" name="y" value="0">
+                <label for="0">0</label>
+              </div>
+            </td>
+            <td>
+              <div class="form_radio">
+                <input type="radio" id="1" name="y" value="1">
+                <label for="1">1</label>
+              </div>
+            </td>
+            <td>
+              <div class="form_radio">
+                <input type="radio" id="2" name="y" value="2">
+                <label for="2">2</label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="form_radio">
+                <input type="radio" id="3" name="y" value="3">
+                <label for="3">3</label>
+              </div>
+            </td>
+            <td>
+              <div class="form_radio">
+                <input type="radio" id="4" name="y" value="4">
+                <label for="4">4</label>
+              </div>
+            </td>
+            <td>
+              <div class="form_radio">
+                <input type="radio" id="5" name="y" value="5">
+                <label for="5">5</label>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <p>R</p>
+        <div>
+          <select name="r" id="r_select">
+            <option value="">--Please choose R--</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+        <button type="submit" class="button_form" id="check">check</button>
+        <button type="reset" class="button_form" id="clear">clear</button>
+      </form>
+    </div>
+    <div id="image_block" class="info_block">
+      <canvas id="image-canvas"/>
+    </div>
+    <div id="table_block">
+      <table id="result-table">
+        <tr>
+          <th>X</th>
+          <th>Y</th>
+          <th>R</th>
+          <th>Current time</th>
+          <th>Execution time</th>
+          <th>Hit result</th>
+        </tr>
+      </table>
+    </div>
+    <div id="clear">
+	  </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
