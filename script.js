@@ -187,45 +187,44 @@ var cubes3D = d3._3d()
   .scale(scale);
 
 function processData(data){
-      drawCube(data[4]);
+  drawCube(data[4]);
 
-      drawPoints(data[0]);
+  drawPoints(data[0]);
 
-      drawScales(data);
+  drawScales(data);
 
-      drawTexts(data);
-    }
+  drawTexts(data);
+}
 
 function posPointX(d){
-      return d.projected.x;
-    }
+  return d.projected.x;
+}
 
 function posPointY(d){
-      return d.projected.y;
-    }
+  return d.projected.y;  }
 
 function init(_x, _y, _z, _r){
-      scatter.push({x: shift+Number(_x), y: -Number(_y), z: shift+Number(_z), id: 'point_' + cnt++});
+  scatter.push({x: shift+Number(_x), y: -Number(_y), z: shift+Number(_z), id: 'point_' + cnt++});
 
-      if (_r != null) {
-        var _cube = makeCube(Number(_r), -6, -6);
-        _cube.id = 'cube_' + _r;
-        if (cubesData.length == 0) {
-          cubesData.push(_cube);
-        } else {
-          cubesData[0] = _cube;
-        }
-      }
-
-      var data = [
-        point3d(scatter),
-        yScale3d([yLine]),
-        xScale3d([xLine]),
-        zScale3d([zLine]),
-        cubes3D(cubesData),
-      ];
-      processData(data);
+  if (_r != null) {
+    var _cube = makeCube(Number(_r), -6, -6);
+    _cube.id = 'cube_' + _r;
+    if (cubesData.length == 0) {
+      cubesData.push(_cube);
+    } else {
+      cubesData[0] = _cube;
     }
+  }
+
+  var data = [
+    point3d(scatter),
+    yScale3d([yLine]),
+    xScale3d([xLine]),
+    zScale3d([zLine]),
+    cubes3D(cubesData),
+  ];
+  processData(data);
+}
 
 function clear_init() {
   scatter = [];
@@ -242,203 +241,203 @@ function clear_init() {
 }
 
 function dragStart(){
-      mx = d3.event.x;
-      my = d3.event.y;
-    }
+  mx = d3.event.x;
+  my = d3.event.y;
+}
 
 function dragged(){
-      mouseX = mouseX || 0;
-      mouseY = mouseY || 0;
-      beta   = (d3.event.x - mx + mouseX) * Math.PI / 230 ;
-      alpha  = (d3.event.y - my + mouseY) * Math.PI / 230  * (-1);
-      var data = [
-        point3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)(scatter),
-        yScale3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)([yLine]),
-        xScale3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)([xLine]),
-        zScale3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)([zLine]),
-        cubes3D.rotateY(beta + startAngle).rotateX(alpha - startAngle)(cubesData),
-      ];
-      processData(data);
-    }
+  mouseX = mouseX || 0;
+  mouseY = mouseY || 0;
+  beta   = (d3.event.x - mx + mouseX) * Math.PI / 230 ;
+  alpha  = (d3.event.y - my + mouseY) * Math.PI / 230  * (-1);
+  var data = [
+    point3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)(scatter),
+    yScale3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)([yLine]),
+    xScale3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)([xLine]),
+    zScale3d.rotateY(beta + startAngle).rotateX(alpha - startAngle)([zLine]),
+    cubes3D.rotateY(beta + startAngle).rotateX(alpha - startAngle)(cubesData),
+  ];
+  processData(data);
+}
 
 function dragEnd(){
-      mouseX = d3.event.x - mx + mouseX;
-      mouseY = d3.event.y - my + mouseY;
-    }
+  mouseX = d3.event.x - mx + mouseX;
+  mouseY = d3.event.y - my + mouseY;
+}
 
 function makeCube(h, x, z){
-      return [
-        {x: x - h, y: h-5, z: z + h},
-        {x: x - h, y: -h-5, z: z + h},
-        {x: x + h, y: -h-5, z: z + h},
-        {x: x + h, y: h-5, z: z + h},
-        {x: x - h, y: h-5, z: z - h},
-        {x: x - h, y: -h-5, z: z - h},
-        {x: x + h, y: -h-5, z: z - h},
-        {x: x + h, y: h-5, z: z - h},
-      ];
-    }
+  return [
+    {x: x - h, y: h-5, z: z + h},
+    {x: x - h, y: -h-5, z: z + h},
+    {x: x + h, y: -h-5, z: z + h},
+    {x: x + h, y: h-5, z: z + h},
+    {x: x - h, y: h-5, z: z - h},
+    {x: x - h, y: -h-5, z: z - h},
+    {x: x + h, y: -h-5, z: z - h},
+    {x: x + h, y: h-5, z: z - h},
+  ];
+}
 
 function drawCube(data) {
-      var cubes = svg.selectAll('g.cube').data(data, function(d){ return d.id });
+  var cubes = svg.selectAll('g.cube').data(data, function(d){ return d.id });
 
-      var ce = cubes
-          .enter()
-          .append('g')
-          .attr('class', 'cube')
-          .attr('fill', function(d){ return color(d.id); })
-          .attr('stroke', function(d){ return d3.color(color(d.id)).darker(2); })
-          .merge(cubes);
+  var ce = cubes
+      .enter()
+      .append('g')
+      .attr('class', 'cube')
+      .attr('fill', function(d){ return color(d.id); })
+      .attr('stroke', function(d){ return d3.color(color(d.id)).darker(2); })
+      .merge(cubes);
 
-      cubes.exit().remove();
+  cubes.exit().remove();
 
-      var faces = svg.selectAll('g.cube').selectAll('path.face').data(function(d){ return d.faces; }, function(d){ return d.face; });
+  var faces = svg.selectAll('g.cube').selectAll('path.face').data(function(d){ return d.faces; }, function(d){ return d.face; });
 
-      faces.enter()
-          .append('path')
-          .attr('class', 'face')
-          .attr('fill-opacity', 0.4)
-          .classed('_3d', true)
-          .merge(faces)
-          .transition().duration(tt)
-          .attr('d', cubes3D.draw);
+  faces.enter()
+      .append('path')
+      .attr('class', 'face')
+      .attr('fill-opacity', 0.4)
+      .classed('_3d', true)
+      .merge(faces)
+      .transition().duration(tt)
+      .attr('d', cubes3D.draw);
 
-      faces.exit().remove();
-    }
+  faces.exit().remove();
+}
 
 function drawPoints(data) {
-      var points = svg.selectAll('circle').data(data, key);
+  var points = svg.selectAll('circle').data(data, key);
 
-      points
-          .enter()
-          .append('circle')
-          .attr('class', '_3d')
-          .attr('opacity', 0)
-          .attr('cx', posPointX)
-          .attr('cy', posPointY)
-          .merge(points)
-          .transition().duration(tt)
-          .attr('r', 3)
-          .attr('stroke', function(d){ return d3.color(color(d.id)).darker(3); })
-          .attr('fill', function(d){ return color(d.id); })
-          .attr('opacity', 1)
-          .attr('cx', posPointX)
-          .attr('cy', posPointY);
+  points
+      .enter()
+      .append('circle')
+      .attr('class', '_3d')
+      .attr('opacity', 0)
+      .attr('cx', posPointX)
+      .attr('cy', posPointY)
+      .merge(points)
+      .transition().duration(tt)
+      .attr('r', 3)
+      .attr('stroke', function(d){ return d3.color(color(d.id)).darker(3); })
+      .attr('fill', function(d){ return color(d.id); })
+      .attr('opacity', 1)
+      .attr('cx', posPointX)
+      .attr('cy', posPointY);
 
-      points.exit().remove();
-    }
+  points.exit().remove();
+}
 
 function drawScales(data) {
-      drawXScale(data[2]);
-      drawYScale(data[1]);
-      drawZScale(data[3]);
-    }
+  drawXScale(data[2]);
+  drawYScale(data[1]);
+  drawZScale(data[3]);
+}
 
 function drawTexts(data) {
-      drawXText(data[2]);
-      drawYText(data[1]);
-      drawZText(data[3]);
-    }
+  drawXText(data[2]);
+  drawYText(data[1]);
+  drawZText(data[3]);
+}
 
 function drawXScale(data) {
-      var xScale = svg.selectAll('path.xScale').data(data);
+  var xScale = svg.selectAll('path.xScale').data(data);
 
-      xScale
-          .enter()
-          .append('path')
-          .attr('class', '_3d xScale')
-          .merge(xScale)
-          .attr('stroke', 'black')
-          .attr('stroke-width', .5)
-          .attr('d', xScale3d.draw);
+  xScale
+      .enter()
+      .append('path')
+      .attr('class', '_3d xScale')
+      .merge(xScale)
+      .attr('stroke', 'black')
+      .attr('stroke-width', .5)
+      .attr('d', xScale3d.draw);
 
-      xScale.exit().remove();
-    }
+  xScale.exit().remove();
+}
 
 function drawYScale(data) {
-      var yScale = svg.selectAll('path.yScale').data(data);
+  var yScale = svg.selectAll('path.yScale').data(data);
 
-      yScale
-          .enter()
-          .append('path')
-          .attr('class', '_3d yScale')
-          .merge(yScale)
-          .attr('stroke', 'black')
-          .attr('stroke-width', .5)
-          .attr('d', yScale3d.draw);
+  yScale
+      .enter()
+      .append('path')
+      .attr('class', '_3d yScale')
+      .merge(yScale)
+      .attr('stroke', 'black')
+      .attr('stroke-width', .5)
+      .attr('d', yScale3d.draw);
 
-      yScale.exit().remove();
+  yScale.exit().remove();
 
-    }
+}
 
 function drawZScale(data) {
-      var zScale = svg.selectAll('path.zScale').data(data);
+  var zScale = svg.selectAll('path.zScale').data(data);
 
-      zScale
-          .enter()
-          .append('path')
-          .attr('class', '_3d zScale')
-          .merge(zScale)
-          .attr('stroke', 'black')
-          .attr('stroke-width', .5)
-          .attr('d', zScale3d.draw);
+  zScale
+      .enter()
+      .append('path')
+      .attr('class', '_3d zScale')
+      .merge(zScale)
+      .attr('stroke', 'black')
+      .attr('stroke-width', .5)
+      .attr('d', zScale3d.draw);
 
-      zScale.exit().remove();
-    }
+  zScale.exit().remove();
+}
 
 function drawXText(data) {
-      var xText = svg.selectAll('text.xText').data(data[0]);
+  var xText = svg.selectAll('text.xText').data(data[0]);
 
-      xText
-          .enter()
-          .append('text')
-          .attr('class', '_3d xText')
-          .attr('dx', '.3em')
-          .merge(xText)
-          .each(function(d){
-              d.centroid = {x: d.rotated.x, y: d.rotated.y, z: d.rotated.z};
-          })
-          .attr('x', function(d){ return d.projected.x; })
-          .attr('y', function(d){ return d.projected.y; })
-          .text(function(d){ return d[0]+10 >= 0 ? d[0]+10 : ""; });
+  xText
+      .enter()
+      .append('text')
+      .attr('class', '_3d xText')
+      .attr('dx', '.3em')
+      .merge(xText)
+      .each(function(d){
+          d.centroid = {x: d.rotated.x, y: d.rotated.y, z: d.rotated.z};
+      })
+      .attr('x', function(d){ return d.projected.x; })
+      .attr('y', function(d){ return d.projected.y; })
+      .text(function(d){ return d[0]+10 >= 0 ? d[0]+10 : ""; });
 
-      xText.exit().remove();
-    }
+  xText.exit().remove();
+}
 
 function drawYText(data) {
-      var yText = svg.selectAll('text.yText').data(data[0]);
+  var yText = svg.selectAll('text.yText').data(data[0]);
 
-      yText
-          .enter()
-          .append('text')
-          .attr('class', '_3d yText')
-          .attr('dx', '.3em')
-          .merge(yText)
-          .each(function(d){
-              d.centroid = {x: d.rotated.x, y: d.rotated.y, z: d.rotated.z};
-          })
-          .attr('x', function(d){ return d.projected.x; })
-          .attr('y', function(d){ return d.projected.y; })
-          .text(function(d){ return d[1] <= 0 ? -d[1] : ''; });
+  yText
+      .enter()
+      .append('text')
+      .attr('class', '_3d yText')
+      .attr('dx', '.3em')
+      .merge(yText)
+      .each(function(d){
+          d.centroid = {x: d.rotated.x, y: d.rotated.y, z: d.rotated.z};
+      })
+      .attr('x', function(d){ return d.projected.x; })
+      .attr('y', function(d){ return d.projected.y; })
+      .text(function(d){ return d[1] <= 0 ? -d[1] : ''; });
 
-      yText.exit().remove();
-    }
+  yText.exit().remove();
+}
 
 function drawZText(data) {
-      var zText = svg.selectAll('text.zText').data(data[0]);
+  var zText = svg.selectAll('text.zText').data(data[0]);
 
-      zText
-          .enter()
-          .append('text')
-          .attr('class', '_3d zText')
-          .attr('dx', '.3em')
-          .merge(zText)
-          .each(function(d){
-              d.centroid = {x: d.rotated.x, y: d.rotated.y, z: d.rotated.z};
-          })
-          .attr('x', function(d){ return d.projected.x; })
-          .attr('y', function(d){ return d.projected.y; })
-          .text(function(d){ return d[2]+10 >= 0 ? d[2]+10 : ''; });
+  zText
+      .enter()
+      .append('text')
+      .attr('class', '_3d zText')
+      .attr('dx', '.3em')
+      .merge(zText)
+      .each(function(d){
+          d.centroid = {x: d.rotated.x, y: d.rotated.y, z: d.rotated.z};
+      })
+      .attr('x', function(d){ return d.projected.x; })
+      .attr('y', function(d){ return d.projected.y; })
+      .text(function(d){ return d[2]+10 >= 0 ? d[2]+10 : ''; });
 
-      zText.exit().remove();
-    }
+  zText.exit().remove();
+}
