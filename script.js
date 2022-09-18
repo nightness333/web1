@@ -19,7 +19,11 @@ function validate_x() {
 }
 
 function validate_y() {
-  x = parseInt($("#input_y")[0].value);
+  if (!$("#input_y")[0].value) {
+    valid_message("Y is non-valid");
+    return false;
+  }
+  x = Number($("#input_y")[0].value);
   if (x != null) {
     if (x >= 0 && x <= 10) {
       return true;
@@ -34,7 +38,11 @@ function validate_y() {
 }
 
 function validate_z() {
-  x = parseInt($("#input_z")[0].value);
+  if (!$("#input_z")[0].value) {
+    valid_message("Z is non-valid");
+    return false;
+  }
+  x = Number($("#input_z")[0].value);
   if (x != null) {
     if (x >= 0 && x <= 10) {
       return true;
@@ -65,7 +73,9 @@ function validate() {
   let z = validate_z();
   let r = validate_r();
   if (!(x && y && z && r)) {
-    $("#warning_text").hide().text("WRONG").fadeIn("slow");
+    $("#warning_text").animate({opacity:0}, 200, function () {
+      $("#warning_text").css({'color': 'rgba(255,0,0,1)'}).text("WRONG").animate({opacity:1}, 200);
+    });
   }
   return x && y && z && r;
 }
@@ -80,7 +90,7 @@ function draw_point() {
 
 function reset_names() {
   $("#warning_text").animate({opacity:0}, 100, function () {
-    $("#warning_text").text("Cheremnov Konstantin");
+    $("#warning_text").css({'color': 'rgba(0,0,0,0.8)'}).text("Cheremnov Konstantin");
     $("#warning_text").animate({opacity:1}, 100);
   });
   valid_message("P32131, var: 1319");

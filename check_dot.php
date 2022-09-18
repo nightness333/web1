@@ -2,6 +2,12 @@
 session_start();
 
 $response = [];
+$rows;
+if (!isset($_SESSION['rows'])) {
+  $rows = [];
+} else {
+  $rows = $_SESSION['rows'];
+}
 
 function checkDot($x, $y, $z, $r) {
   return $x >= 4 - $r && $x <= 4 + $r && $y >= 4 - $r && $y <= 4 + $r && $z >= 5 - $r && $z <= 5 + $r;
@@ -28,18 +34,12 @@ function validate_xyzr($x, $y, $z, $r) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-  if(!isset($_SESSION['lab1_table'])) {
-    $_SESSION['lab1_table'] = '';
-  }
-
-  $response = $_SESSION['lab1_table'];
-
+  $response = implode("", $rows);
   exit($response);
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
-  $_SESSION['lab1_table'] = '';
-
+  $_SESSION['rows'] = [];
   exit();
 }
 
@@ -57,12 +57,12 @@ if (isset($_REQUEST['x']) && isset($_REQUEST['y']) && isset($_REQUEST['z']) && i
   if ($isValid == 'true') {
     $row = "<tr><td>" . strval($x) . "</td><td>" . strval($y) . "</td><td>" . strval($z) . "</td><td>" . strval($r) . "</td><td>" .
       strval($currentTime) . "</td><td>" . strval($executionTime) . "</td><td>" . $isHit . "</td></tr>";
-    if (!isset($_SESSION['lab1_table'])) {
-      $_SESSION['lab1_table'] = $row;
-    } else {
-      $_SESSION['lab1_table'] = $_SESSION['lab1_table'] . $row;
+    $rows[] = $row;
+    if (count($rows) > 19) {
+      array_shift($rows);
     }
-    $response = $_SESSION['lab1_table'];
+    $response = implode("", $rows);
+    $_SESSION['rows'] = $rows;
   } else {
     $response = "500";
     http_response_code(500);
