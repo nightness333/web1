@@ -122,6 +122,7 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
+  clear_init();
   $.ajax({
     method: "GET",
     url: "check_dot.php",
